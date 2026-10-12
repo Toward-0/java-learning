@@ -14,6 +14,7 @@ My Java learning notes and practice code
 | 当时写的代码和真实错误 | [原始片段 A01～A09](docs/original-snippets.md) |
 | 按日期回顾、继续记录新练习 | [学习日志](docs/learning-log.md) |
 | 编译运行示例、核对输出 | [练习指南](practice/README.md) |
+| 保存今后独立完成的程序 | [独立程序保存规则](practice/independent/README.md) |
 
 ## 目前的学习成果
 
@@ -55,3 +56,9 @@ practice/arrays/          数组求和、偶数计数示例
 ```
 
 仅使用基础 Java 语法，不引入构建框架。编译产物由 `.gitignore` 忽略；方法、面向对象、集合、异常等后续主题不列为已掌握。
+
+## 自动检查与协作
+
+[JDK 25 工作流](.github/workflows/java-basics.yml)在推送和 Pull Request 时编译当前五个 Java 程序，逐一核对无输入示例的预期输出。使用 `javac`、`java` 和 `diff`，不引入构建框架；运行结果以 PR 的 Checks 为准。通过检查不代表完成新的学习任务。
+
+仓库修改遵循 [AGENTS.md](AGENTS.md)；后续学习继续复用[学习日志](docs/learning-log.md)中的模板。
