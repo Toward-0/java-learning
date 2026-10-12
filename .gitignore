@@ -1,0 +1,12 @@
+# Java 编译产物
+*.class
+out/
+bin/
+target/
+
+# 编辑器与系统本地文件
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
