@@ -30,6 +30,16 @@ jobs:
             practice/loops/OddSum.java \
             practice/arrays/ArraySum.java \
             practice/arrays/EvenCount.java
+      - name: Compile each practice file separately
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' source; do
+            rm -rf out/isolated
+            mkdir -p out/isolated
+            echo "Compiling: $source"
+            javac -encoding UTF-8 -d out/isolated "$source"
+          done < <(find practice -type f -name '*.java' -print0)
       - name: Check exact output of programs without input
         shell: bash
         run: |

@@ -1,6 +1,6 @@
 # 基础练习指南
 
-[返回首页](../README.md) · [原始片段](../docs/original-snippets.md) · [学习进度](../docs/learning-progress.md)
+[返回首页](../README.md) · [原始片段](../docs/original-snippets.md) · [学习状态与日志](../docs/learning.md)
 
 这里的 4 个程序以已确认片段为基础，便于编译和观察结果。**类、main、测试数据及讲解为整理者补充 [C]**，不代表学习者当时独立写出了整份程序。原文与错误保存在 Markdown 中。
 
@@ -61,4 +61,4 @@ java -cp out EvenCount
 
 2026-10-12 使用 OpenJDK 21.0.12.1 的 javac 编译器及 java，对已有 `Main` 和 4 个示例逐个编译运行、核对输出，合并编译也通过。环境没有独立 javac 启动命令，实际以 `java com.sun.tools.javac.Main` 调用同一编译器。
 
-示例使用 JDK 25 支持的基础语法；本次没有实际在 JDK 25 或 Windows PowerShell 上执行。`.class`、`out/` 等编译产物不提交到仓库。
+后续 GitHub Actions（JDK 25 / Ubuntu）已在 [PR #2](https://github.com/Toward-0/java-learning/pull/2) 中成功编译并核对五个程序输出；Windows PowerShell 仍未独立验证。`.class`、`out/` 等编译产物不提交到仓库。
