@@ -7,11 +7,12 @@
 | 想做什么 | 去哪里 |
 | --- | --- |
 | 看现在会什么、下一步学什么 | [学习状态与日志](docs/learning.md) |
+| 查看第26～31题复习示例与运行方式 | [数组练习索引](practice/README.md) |
 | 运行基础示例 | [练习指南](practice/README.md) |
 | 看历史真实片段和当时的错误 | [原始片段 A01～A09](docs/original-snippets.md) |
 | 保存将来独立写出的程序 | [独立程序规则](practice/independent/README.md) |
 
-**现有代码**：`Main.java` 是最早的打印入门程序，不是所有练习的总入口。四个独立运行的教学包装示例分别在 [practice/loops](practice/loops) 和 [practice/arrays](practice/arrays)；程序外壳或测试数据由整理者补充的地方均标为 [C]，不算独立作品。
+**现有代码**：`Main.java` 是最早的打印入门程序，不是所有练习的总入口。原有四个独立运行的教学包装示例分别在 [practice/loops](practice/loops) 和 [practice/arrays](practice/arrays)，新增数组复习示例也在 `practice/arrays/`（第28～29题的 `Main` 单独编译）；程序外壳或测试数据由整理者补充的地方均标为 [C]，不算独立作品。
 
 ## 快速运行（Windows PowerShell）
 

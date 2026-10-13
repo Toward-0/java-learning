@@ -2,7 +2,7 @@
 
 [返回首页](../README.md) · [原始片段](../docs/original-snippets.md) · [学习状态与日志](../docs/learning.md)
 
-这里的 4 个程序以已确认片段为基础，便于编译和观察结果。**类、main、测试数据及讲解为整理者补充 [C]**，不代表学习者当时独立写出了整份程序。原文与错误保存在 Markdown 中。
+这里原有的 4 个程序以已确认片段为基础，便于编译和观察结果。**类、main、测试数据及讲解为整理者补充 [C]**，不代表学习者当时独立写出了整份程序。原文与错误保存在 Markdown 中。
 
 ## 示例索引
 
@@ -13,7 +13,44 @@
 | [ArraySum](arrays/ArraySum.java) | A04 | 上述外壳，加测试数组 `{3, -2, 7, 0}` | 8 |
 | [EvenCount](arrays/EvenCount.java) | A05 | 上述外壳，加测试数组 `{-4, -3, 0, 2, 7, 8}` | 4 |
 
-A03 的步长为 2 的写法保留在原始片段文档中。A04、A05 的原练习数组未收录，因此这里的数值输出只对应补充数据。`EvenCount` 统计偶数个数，不是尚未作答的第 26 题。
+A03 的步长为 2 的写法保留在原始片段文档中。A04、A05 的原练习数组未收录，因此这里的数值输出只对应补充数据。`EvenCount` 统计偶数个数，不是第26题偶数求和；第26题的最新状态见学习日志。
+
+## 第26～31题复习示例 [C]
+
+这些新增文件可各自独立运行；全部代码、测试数据和输出格式由 AI 按用户确认的题目概要整理，不是用户原始答案，也不放入独立作品目录。第28～29题只保留一份正式源码。第32题待完成，不提供代码。
+
+| 题号 | 程序 | AI 补充测试数据的预期输出 |
+| --- | --- | --- |
+| 26 | [EvenSum](arrays/EvenSum.java) | `6` |
+| 27 | [GreaterThanTenCount](arrays/GreaterThanTenCount.java) | `4` |
+| 28～29 | [Main](arrays/filtered-stats/Main.java) | 见下方三行 |
+| 30 | [ArrayMax](arrays/ArrayMax.java) | `-3` |
+| 31 | [ArrayMinMax](arrays/ArrayMinMax.java) | `最大值：-3`、`最小值：-12`，各占一行 |
+
+第28～29题的预期输出：
+
+```text
+符合条件的元素：12 18 20
+数量：3
+总和：50
+```
+
+在仓库根目录分别编译运行（第30～31题假设数组非空）。中文输出采用 UTF-8，PowerShell 的解码也需保持一致：
+
+```powershell
+New-Item -ItemType Directory -Force out | Out-Null
+javac -encoding UTF-8 -d out practice/arrays/EvenSum.java practice/arrays/GreaterThanTenCount.java practice/arrays/ArrayMax.java practice/arrays/ArrayMinMax.java
+java -cp out EvenSum
+java -cp out GreaterThanTenCount
+java -cp out ArrayMax
+[Console]::OutputEncoding = [System.Text.UTF8Encoding]::new($false)
+java -Dstdout.encoding=UTF-8 -cp out ArrayMinMax
+
+# 第28～29题与根目录 Main 同名，使用单独输出目录。
+New-Item -ItemType Directory -Force out/filtered-stats | Out-Null
+javac -encoding UTF-8 -d out/filtered-stats practice/arrays/filtered-stats/Main.java
+java -Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -cp out/filtered-stats Main
+```
 
 ## 编译运行（Windows PowerShell / JDK 25）
 
@@ -62,3 +99,5 @@ java -cp out EvenCount
 2026-10-12 使用 OpenJDK 21.0.12.1 的 javac 编译器及 java，对已有 `Main` 和 4 个示例逐个编译运行、核对输出，合并编译也通过。环境没有独立 javac 启动命令，实际以 `java com.sun.tools.javac.Main` 调用同一编译器。
 
 后续 GitHub Actions（JDK 25 / Ubuntu）已在 [PR #2](https://github.com/Toward-0/java-learning/pull/2) 中成功编译并核对五个程序输出；Windows PowerShell 仍未独立验证。`.class`、`out/` 等编译产物不提交到仓库。
+
+2026-10-13 增量验证：在 Windows PowerShell 使用 Oracle JDK 25.0.4.1，对新增5个源码逐个编译并运行，输出逐字匹配练习指南；以 UTF-8 解码标准输出，并使用 `-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8`。编译产物未提交。现有 Actions 会逐个编译新增文件，但其固定输出检查仍只覆盖原有五个程序；新增示例的输出通过本次运行验证。
