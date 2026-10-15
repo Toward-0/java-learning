@@ -17,43 +17,36 @@ jobs:
         with:
           distribution: temurin
           java-version: '25'
-      - name: Compile the five existing programs
+      - name: Compile separately and check known example outputs
         shell: bash
         run: |
           set -euo pipefail
           java -version
           javac -version
-          mkdir -p out
-          javac -encoding UTF-8 -d out \
-            Main.java \
-            practice/loops/EvenRunningTotal.java \
-            practice/loops/OddSum.java \
-            practice/arrays/ArraySum.java \
-            practice/arrays/EvenCount.java
-      - name: Compile each practice file separately
-        shell: bash
-        run: |
-          set -euo pipefail
           while IFS= read -r -d '' source; do
-            rm -rf out/isolated
-            mkdir -p out/isolated
+            build_dir="$(mktemp -d)"
             echo "Compiling: $source"
-            javac -encoding UTF-8 -d out/isolated "$source"
-          done < <(find practice -type f -name '*.java' -print0)
-      - name: Check exact output of programs without input
-        shell: bash
-        run: |
-          set -euo pipefail
-          check_output() {
-            local class_name="$1"
-            local expected="$2"
-            printf '%s\n' "$expected" > "out/$class_name.expected.txt"
-            timeout 10s java -Dfile.encoding=UTF-8 -cp out "$class_name" < /dev/null > "out/$class_name.actual.txt"
-            diff -u "out/$class_name.expected.txt" "out/$class_name.actual.txt"
-            printf 'PASS: %s\n' "$class_name"
-          }
-          check_output Main '我的 Java 已准备好！'
-          check_output EvenRunningTotal $'2\n6\n12\n20\n30'
-          check_output OddSum '25'
-          check_output ArraySum '8'
-          check_output EvenCount '4'
+            javac -encoding UTF-8 -d "$build_dir" "$source"
+            case "$source" in
+              Main.java) expected='我的 Java 已准备好！' ;;
+              practice/loops/EvenRunningTotal.java) expected=$'2\n6\n12\n20\n30' ;;
+              practice/loops/OddSum.java) expected='25' ;;
+              practice/arrays/ArraySum.java) expected='8' ;;
+              practice/arrays/EvenCount.java) expected='4' ;;
+              practice/arrays/EvenSum.java) expected='6' ;;
+              practice/arrays/GreaterThanTenCount.java) expected='4' ;;
+              practice/arrays/filtered-stats/Main.java) expected=$'符合条件的元素：12 18 20\n数量：3\n总和：50' ;;
+              practice/arrays/ArrayMax.java) expected='-3' ;;
+              practice/arrays/ArrayMinMax.java) expected=$'最大值：-3\n最小值：-12' ;;
+              *) rm -r -- "$build_dir"; continue ;;
+            esac
+            class_name="$(basename "$source" .java)"
+            printf '%s\n' "$expected" > "$build_dir/expected.txt"
+            timeout 10s java -Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -cp "$build_dir" "$class_name" < /dev/null > "$build_dir/actual.txt"
+            diff -u "$build_dir/expected.txt" "$build_dir/actual.txt"
+            echo "PASS: $source"
+            rm -r -- "$build_dir"
+          done < <(find Main.java practice -type f -name '*.java' -print0)
+      - name: Check array boundaries using the existing source logic
+        shell: pwsh
+        run: ./scripts/check-array-boundaries.ps1
