@@ -1,6 +1,6 @@
 /**
  * 来源：docs/original-snippets.md A04 [A]。
- * [C] 整理者新增类、main、缩进、说明及测试数组，不是用户原创完整程序。
+ * 本人编写求和逻辑；[C] Codex 补充类、main、说明及测试数组，并调整缩进。
  * 输出：8。
  */
 public class ArraySum {

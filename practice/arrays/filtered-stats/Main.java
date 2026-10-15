@@ -1,6 +1,6 @@
 /**
  * 第28～29题：大于10且为偶数的筛选、数量和总和，完整 Main 与输出格式。
- * [C] 本文件的代码、测试数组和输出格式由 AI 整理，不是用户原始作答。
+ * 本人编写的练习代码（依据本人来源澄清）；Codex 协助整理、排版和同步。
  */
 public class Main {
     public static void main(String[] args) {

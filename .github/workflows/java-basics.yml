@@ -47,3 +47,6 @@ jobs:
             echo "PASS: $source"
             rm -r -- "$build_dir"
           done < <(find Main.java practice -type f -name '*.java' -print0)
+      - name: Check array boundaries using the existing source logic
+        shell: pwsh
+        run: ./scripts/check-array-boundaries.ps1
