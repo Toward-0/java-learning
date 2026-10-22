@@ -1,6 +1,6 @@
 # 基础练习指南
 
-[返回首页](../README.md) · [原始片段](../docs/original-snippets.md) · [学习状态与日志](../docs/learning.md)
+[返回首页](../README.md) · [原始片段](../docs/original-snippets.md) · [学习状态与日志](../docs/learning.md) · [独立程序](independent/README.md)
 
 这里原有的 4 个程序以已确认片段为基础，便于编译和观察结果。**类、main、测试数据及讲解为整理者补充 [C]**，不代表学习者当时独立写出了整份程序。原文与错误保存在 Markdown 中。
 
@@ -17,7 +17,7 @@ A03 的步长为 2 的写法保留在原始片段文档中。A04、A05 的原练
 
 ## 第26～31题复习示例 [C]
 
-这些新增文件可各自独立运行；全部代码、测试数据和输出格式由 AI 按用户确认的题目概要整理，不是用户原始答案，也不放入独立作品目录。第28～29题只保留一份正式源码。第32题待完成，不提供代码。
+这些新增文件可各自独立运行；全部代码、测试数据和输出格式由 AI 按用户确认的题目概要整理，不是用户原始答案，也不放入独立作品目录。第28～29题只保留一份正式源码。第32、33题后续已有用户原始作答 [A]，见下方独立程序索引。
 
 | 题号 | 程序 | AI 补充测试数据的预期输出 |
 | --- | --- | --- |
@@ -50,6 +50,26 @@ java -Dstdout.encoding=UTF-8 -cp out ArrayMinMax
 New-Item -ItemType Directory -Force out/filtered-stats | Out-Null
 javac -encoding UTF-8 -d out/filtered-stats practice/arrays/filtered-stats/Main.java
 java -Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -cp out/filtered-stats Main
+```
+
+## 第32、33题用户原始作答 [A]
+
+两份用户原始作答分别保存在按完成日期命名的目录中，均保留原有 `public class Main`，需单独编译运行；第34题已布置，尚未提交答案。完成方式、纠错经历与验证证据见[学习日志](../docs/learning.md)。
+
+| 题号 | 正式源码 | 预期输出 |
+| --- | --- | --- |
+| 32：第一次出现的 18 | [2026-10-14/Main.java](independent/2026-10-14/Main.java) | `1` |
+| 33：所有 18 及次数 | [2026-10-22/Main.java](independent/2026-10-22/Main.java) | 下标 1、3、5 各一行，最后一行是 `18总共出现了3次` |
+
+在仓库根目录分别运行，避免两个 `Main` 的编译产物互相覆盖：
+
+```powershell
+[Console]::OutputEncoding = [System.Text.UTF8Encoding]::new($false)
+New-Item -ItemType Directory -Force out/ex32, out/ex33 | Out-Null
+javac -encoding UTF-8 -d out/ex32 practice/independent/2026-10-14/Main.java
+java '-Dfile.encoding=UTF-8' '-Dstdout.encoding=UTF-8' -cp out/ex32 Main
+javac -encoding UTF-8 -d out/ex33 practice/independent/2026-10-22/Main.java
+java '-Dfile.encoding=UTF-8' '-Dstdout.encoding=UTF-8' -cp out/ex33 Main
 ```
 
 ## 编译运行（Windows PowerShell / JDK 25）
@@ -101,3 +121,5 @@ java -cp out EvenCount
 后续 GitHub Actions（JDK 25 / Ubuntu）已在 [PR #2](https://github.com/Toward-0/java-learning/pull/2) 中成功编译并核对五个程序输出；Windows PowerShell 仍未独立验证。`.class`、`out/` 等编译产物不提交到仓库。
 
 2026-10-13 增量验证：在 Windows PowerShell 使用 Oracle JDK 25.0.4.1，对新增5个源码逐个编译并运行，输出逐字匹配练习指南；以 UTF-8 解码标准输出，并使用 `-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8`。编译产物未提交。现有 Actions 会逐个编译新增文件，但其固定输出检查仍只覆盖原有五个程序；新增示例的输出通过本次运行验证。
+
+2026-10-22 增量验证：Oracle JDK 25.0.4.1 下分别编译、运行第32、33题独立源码，输出与上表及学习日志一致；第32题另用不含 18 的临时副本验证输出 `-1`。临时编译产物未提交。
