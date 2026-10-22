@@ -23,25 +23,15 @@
 
 A03 的另一种奇数求和写法保留在原始片段；A05 是计数，不能当作第26题求和的原答。第32、33题保留用户原始排版。当前待答题只在 [学习记录](../docs/learning.md#当前任务) 维护。
 
-## 一条命令验证
-
-JDK 25、PowerShell 7，在仓库根目录运行：
-
-```powershell
-java -version
-javac -version
-pwsh -File scripts/check-practice.ps1
-```
-
-[脚本](../scripts/check-practice.ps1)和 CI 共用：检查 12 个原有输出、36 个边界用例，每次单独编译并限时运行。保留输出中的空格和末尾换行，仅统一操作系统换行。只在临时副本中换数组，不改正式源码。
-
-边界覆盖非空最大/最小值、条件阈值、零个/一个/全部匹配、负数与 0 的计数/求和；第32、33题还覆盖首尾命中、重复命中、空数组、单元素及未找到。测试数据是验证补充 [C]，通过不等于本人已完成这些练习。
-
-新增正式程序时，在脚本的 `$programs` 中补上源码路径和实际核对的预期输出；脚本会拒绝漏列的程序。未来有输入程序时再补相应输入案例，不提前搭建框架。
-
 ## 单独运行与调试
 
-以下是第33题的完整命令（Windows PowerShell）：
+只运行第33题时，可直接使用 JDK 的源文件运行方式：
+
+```text
+java practice/independent/2026-10-22/Main.java
+```
+
+若要练习编译与运行两个步骤，使用以下命令（Windows PowerShell）：
 
 ```powershell
 [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new($false)
@@ -63,3 +53,21 @@ java '-Dfile.encoding=UTF-8' '-Dstdout.encoding=UTF-8' -cp out/ex33 Main
 | 结果不对 | 先手算一组数据，再跟踪第一个不同的变量值 |
 
 过去的验证记录保留在 [学习日志](../docs/learning.md)。当前覆盖范围以脚本为准；构建产物不提交。
+
+## 维护者全量检查
+
+修改归档源码或检查脚本后，由维护者或 CI 执行。日常做题使用上方单题运行方式，无需先完成全量检查。
+
+JDK 25、PowerShell 7，在仓库根目录运行：
+
+```powershell
+java -version
+javac -version
+pwsh -File scripts/check-practice.ps1
+```
+
+[脚本](../scripts/check-practice.ps1)和 CI 共用：检查 12 个原有输出、36 个边界用例，每次单独编译并限时运行。保留输出中的空格和末尾换行，仅统一操作系统换行。只在临时副本中换数组，不改正式源码。
+
+边界覆盖非空最大/最小值、条件阈值、零个/一个/全部匹配、负数与 0 的计数/求和；第32、33题还覆盖首尾命中、重复命中、空数组、单元素及未找到。测试数据是验证补充 [C]，通过不等于本人已完成这些练习。
+
+新增正式程序时，在脚本的 `$programs` 中补上源码路径和实际核对的预期输出；脚本会拒绝漏列的程序。未来有输入程序时再补相应输入案例，不提前搭建框架。

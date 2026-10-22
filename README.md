@@ -12,14 +12,16 @@
 | 程序索引、运行命令和预期输出 | [练习指南](practice/README.md) |
 | 早期原答和原始错误 | [原始片段 A01～A09](docs/original-snippets.md) |
 
-## 验证现有代码
+## 运行一道已完成的练习
 
-安装 JDK 25 和 PowerShell 7，在仓库根目录执行：
+安装 JDK 25，在仓库根目录执行：
 
-```powershell
-pwsh -File scripts/check-practice.ps1
+```text
+java practice/arrays/EvenCount.java
 ```
 
-脚本分别编译程序，核对固定输出及数组边界；同名 `Main` 使用不同临时目录。单个程序怎样运行见 [练习指南](practice/README.md)。根目录的 `Main.java` 是最初的打印练习，不是所有程序的总入口。
+应输出 `4`。这是直接运行单个源文件，无需配置额外构建工具。先预测结果再运行；其他题目的路径、预期输出和编译方法见[练习指南](practice/README.md)。
+
+全量检查用于仓库维护，见[维护检查](practice/README.md#维护者全量检查)，日常做题不必先跑整套检查。
 
 记录与协作规则见 [AGENTS.md](AGENTS.md)。学习日志保留原答与关键纠错，验证通过不自动改变掌握状态。
