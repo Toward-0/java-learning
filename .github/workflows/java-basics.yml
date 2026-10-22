@@ -10,50 +10,13 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '25'
-      - name: Compile the five existing programs
-        shell: bash
-        run: |
-          set -euo pipefail
-          java -version
-          javac -version
-          mkdir -p out
-          javac -encoding UTF-8 -d out \
-            Main.java \
-            practice/loops/EvenRunningTotal.java \
-            practice/loops/OddSum.java \
-            practice/arrays/ArraySum.java \
-            practice/arrays/EvenCount.java
-      - name: Compile each practice file separately
-        shell: bash
-        run: |
-          set -euo pipefail
-          while IFS= read -r -d '' source; do
-            rm -rf out/isolated
-            mkdir -p out/isolated
-            echo "Compiling: $source"
-            javac -encoding UTF-8 -d out/isolated "$source"
-          done < <(find practice -type f -name '*.java' -print0)
-      - name: Check exact output of programs without input
-        shell: bash
-        run: |
-          set -euo pipefail
-          check_output() {
-            local class_name="$1"
-            local expected="$2"
-            printf '%s\n' "$expected" > "out/$class_name.expected.txt"
-            timeout 10s java -Dfile.encoding=UTF-8 -cp out "$class_name" < /dev/null > "out/$class_name.actual.txt"
-            diff -u "out/$class_name.expected.txt" "out/$class_name.actual.txt"
-            printf 'PASS: %s\n' "$class_name"
-          }
-          check_output Main '我的 Java 已准备好！'
-          check_output EvenRunningTotal $'2\n6\n12\n20\n30'
-          check_output OddSum '25'
-          check_output ArraySum '8'
-          check_output EvenCount '4'
+      - name: Check all outputs and array boundaries
+        shell: pwsh
+        run: ./scripts/check-practice.ps1
