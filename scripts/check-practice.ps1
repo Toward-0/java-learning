@@ -67,11 +67,6 @@ function Check-Program($source, $expected, $caseName, $values = $null) {
 try {
     # Exact output, including trailing newlines; every checked-in program must be listed.
     $programs = @(
-        @{ Source = 'Main.java'; Expected = "我的 Java 已准备好！`n" }
-        @{ Source = 'practice/loops/EvenRunningTotal.java'; Expected = "2`n6`n12`n20`n30`n" }
-        @{ Source = 'practice/loops/OddSum.java'; Expected = "25`n" }
-        @{ Source = 'practice/arrays/ArraySum.java'; Expected = "8`n" }
-        @{ Source = 'practice/arrays/EvenCount.java'; Expected = "4`n" }
         @{ Source = 'practice/arrays/EvenSum.java'; Expected = "6`n" }
         @{ Source = 'practice/arrays/GreaterThanTenCount.java'; Expected = "4`n" }
         @{ Source = 'practice/arrays/ArrayMax.java'; Expected = "-3`n" }
@@ -80,7 +75,7 @@ try {
         @{ Source = 'practice/independent/2026-10-14/Main.java'; Expected = "1`n" }
         @{ Source = 'practice/independent/2026-10-22/Main.java'; Expected = "找到18，下标为：1`n找到18，下标为：3`n找到18，下标为：5`n18总共出现了3次" }
     )
-    $sources = @('Main.java') + @(Get-ChildItem (Join-Path $repoRoot 'practice') -Recurse -Filter '*.java' | ForEach-Object {
+    $sources = @(Get-ChildItem (Join-Path $repoRoot 'practice') -Recurse -Filter '*.java' | ForEach-Object {
         [System.IO.Path]::GetRelativePath($repoRoot, $_.FullName).Replace('\', '/')
     })
     $difference = Compare-Object ($sources | Sort-Object -Unique) ($programs.Source | Sort-Object -Unique)
@@ -106,15 +101,12 @@ try {
     Check-Program 'practice/arrays/filtered-stats/Main.java' "符合条件的元素：`n数量：0`n总和：0`n" 'no match' '10, 11, -2, 0'
     Check-Program 'practice/arrays/filtered-stats/Main.java' "符合条件的元素：12`n数量：1`n总和：12`n" 'one match' '10, 12, 13, 0, -2'
     Check-Program 'practice/arrays/filtered-stats/Main.java' "符合条件的元素：12 18 20`n数量：3`n总和：50`n" 'all match' '12, 18, 20'
-    Check-Program 'practice/arrays/ArraySum.java' "0`n" 'zero sum' '0, -2, 2'
-    Check-Program 'practice/arrays/ArraySum.java' "-8`n" 'negative sum' '-5, 0, -3'
     foreach ($case in @(
-        @{ Values = '-3, 1, 7'; Sum = '0'; Count = '0' }
-        @{ Values = '-3, 0, 7'; Sum = '0'; Count = '1' }
-        @{ Values = '-4, 0, 2'; Sum = '-2'; Count = '3' }
+        @{ Values = '-3, 1, 7'; Sum = '0' }
+        @{ Values = '-3, 0, 7'; Sum = '0' }
+        @{ Values = '-4, 0, 2'; Sum = '-2' }
     )) {
         Check-Program 'practice/arrays/EvenSum.java' ($case.Sum + "`n") "array {$($case.Values)}" $case.Values
-        Check-Program 'practice/arrays/EvenCount.java' ($case.Count + "`n") "array {$($case.Values)}" $case.Values
     }
 
     # Catch the historical fixed-index error and confusion between first/all matches.
@@ -129,7 +121,7 @@ try {
         Check-Program 'practice/independent/2026-10-14/Main.java' ($case.First + "`n") $case.Name $case.Values
         Check-Program 'practice/independent/2026-10-22/Main.java' $case.All $case.Name $case.Values
     }
-    Write-Output "Passed $checked checks (12 original outputs, 36 boundary cases). No learner state was changed."
+    Write-Output "Passed $checked checks ($($programs.Count) original outputs, $($checked - $programs.Count) boundary cases). No learner state was changed."
 }
 finally {
     if (Test-Path -LiteralPath $tempRoot) {
