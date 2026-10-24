@@ -1,27 +1,7 @@
-# java-learning
+# Java：基础知识
 
-用 Java 把问题写成可运行的程序，并能解释为什么结果正确。
+目标：独立写出、解释并修改程序。
 
-## 每次从这里继续
+**[当前任务](docs/learning.md#当前任务)** → 尝试 → 验证 → 纠错。
 
-打开 [当前学习状态](docs/learning.md#当前任务)，先完成其中的一道题。先写预测或尝试，再运行检查；遇到错误才回到对应片段。当天只记录改变了理解的地方。
-
-| 需要什么 | 入口 |
-| --- | --- |
-| 当前题目、已有能力与学习记录 | [学习状态与日志](docs/learning.md) |
-| 程序索引、运行命令和预期输出 | [练习指南](practice/README.md) |
-| 早期原答和原始错误 | [原始片段 A01～A09](docs/original-snippets.md) |
-
-## 运行一道已完成的练习
-
-安装 JDK 25，在仓库根目录执行：
-
-```text
-java practice/arrays/EvenCount.java
-```
-
-应输出 `4`。这是直接运行单个源文件，无需配置额外构建工具。先预测结果再运行；其他题目的路径、预期输出和编译方法见[练习指南](practice/README.md)。
-
-全量检查用于仓库维护，见[维护检查](practice/README.md#维护者全量检查)，日常做题不必先跑整套检查。
-
-记录与协作规则见 [AGENTS.md](AGENTS.md)。学习日志保留原答与关键纠错，验证通过不自动改变掌握状态。
+[学习记录](docs/learning.md) · [知识集合](docs/concepts.md) · [程序与运行](practice/README.md) · [原始片段](docs/original-snippets.md) · [维护规则](AGENTS.md)
