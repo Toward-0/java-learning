@@ -1,6 +1,6 @@
 # 数组与遍历
 
-[知识目录](../concepts.md) · [前置：循环](03-loops.md) · [现有程序](../../practice/README.md#程序与预期输出)
+[知识目录](../concepts.md) · [前置：循环](03-loops.md) · [现有程序](../learning.md#题目索引)
 
 ## 数组把同类型数据按位置组织起来
 
