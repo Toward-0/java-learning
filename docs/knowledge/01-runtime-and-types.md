@@ -21,7 +21,7 @@ public class Program {
 
 输出 `19`。公开类名 `Program` 对应文件名；`main` 是这里的启动入口；`String[] args` 接收命令行参数，不是键盘交互输入；`void` 表示方法不返回值。`public` 与 `static` 的含义见[对象](07-objects.md)。Java 25 还支持其他入口形式，这里保持与现有练习一致。参见 [Java 25 启动器](https://docs.oracle.com/en/java/javase/25/docs/specs/man/java.html)。
 
-花括号组织代码块，分号结束语句；缩进不改变含义，却能显示结构。中文说明可以放在注释或字符串内，语法标点使用半角字符。原始片段 A07/A08 的点号、分号错误见[原答](../original-snippets.md)。
+花括号组织代码块，分号结束语句；缩进不改变含义，却能显示结构。中文说明可以放在注释或字符串内，语法标点使用半角字符。原始片段 A07/A08 的点号、分号错误见[原答](../learning.md)。
 
 ## 变量是有类型的存储位置
 

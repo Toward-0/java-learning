@@ -1,27 +1,36 @@
-# Java 知识集合
+# Java：知识目录
 
-[首页](../README.md) · [学习状态](learning.md) · [程序与运行](../practice/README.md)
+[当前任务](../current.md) · [学习记录](learning.md) · [首页](../README.md)
 
-> 本集合为知识说明 [C]，使用 JDK 25；例子不计入本人作答或掌握记录。每篇围绕定义、原理、示例和边界展开，按当前障碍查阅。
+知识说明 [C]，使用 JDK 25。目录表示已有资料，不表示本人已掌握。
 
-## 主题目录
+## 语言基础
 
-| 主题 | 核心问题 |
+| 主题 | 内容 |
 | --- | --- |
-| [01 程序、变量与类型](knowledge/01-runtime-and-types.md) | 程序怎样执行？变量存什么？转换为何可能丢信息？ |
-| [02 运算与分支](knowledge/02-expressions-and-branches.md) | 整数除法、溢出、字符串拼接、短路和分支怎样工作？ |
-| [03 循环与状态](knowledge/03-loops.md) | 每轮改变什么？结果为何正确？循环为何终止？ |
-| [04 数组与遍历](knowledge/04-arrays.md) | 下标与值有何区别？引用是否共享？怎样计数、求和、找极值和匹配？ |
-| [05 字符串与输入](knowledge/05-strings-and-input.md) | 内容与引用怎么比较？不可变意味着什么？输入按词还是按行读取？ |
-| [06 方法与参数](knowledge/06-methods.md) | 输入、返回值和副作用怎样区分？为什么 Java 是值传递？ |
-| [07 类与对象](knowledge/07-objects.md) | 状态属于谁？构造、封装、static、接口与多态有什么作用？ |
-| [08 集合与异常](knowledge/08-collections-and-exceptions.md) | 怎样选择数据容器？怎样表达与处理失败？ |
+| [程序、变量与类型](knowledge/01-runtime-and-types.md) | 执行流程、类型、转换、错误定位 |
+| [运算与分支](knowledge/02-expressions-and-branches.md) | 除法、溢出、拼接、短路、条件分支 |
+| [循环与状态](knowledge/03-loops.md) | 循环形式、控制转移、不变式、终止 |
 
-当前原答对应关系：A01～A03 → 循环；A04～A09 → 数组、输入与语法；第26～33题 → 数组统计与查找。原答只在[片段档案](original-snippets.md)和[练习源码](../practice/README.md)保存。
+## 数据与输入
 
-方法、对象、集合和异常属于后续查阅内容；具体学习状态以[学习记录](learning.md)为准。章末问题用于按需自检，不新增并行任务或排期。
+| 主题 | 内容 |
+| --- | --- |
+| [数组与遍历](knowledge/04-arrays.md) | 下标、引用、统计、极值、查找 |
+| [字符串与输入](knowledge/05-strings-and-input.md) | 内容比较、不可变性、Scanner |
+
+## 抽象与组织
+
+| 主题 | 内容 |
+| --- | --- |
+| [方法与参数](knowledge/06-methods.md) | 合同、返回值、值传递、作用域 |
+| [类与对象](knowledge/07-objects.md) | 状态、构造、封装、接口、多态 |
+| [集合与异常](knowledge/08-collections-and-exceptions.md) | List、Set、Map、异常与资源管理 |
+
+方法、对象、集合与异常为后续查阅内容；实际经历与证据见[学习记录](learning.md#阶段小结2026-10-22)。章末问题仅供按需自检。
 
 ## 怎样使用示例
+
 
 每个 Java 代码块独立看待。标为“完整程序”的示例按所写公开类名保存为同名文件；其余是方法内片段，可分别放入传统 `main` 中运行。不要把不同块直接拼接成一个文件。
 
