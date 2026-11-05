@@ -2,7 +2,7 @@
 
 [知识目录](../concepts.md) · [前置：方法](06-methods.md)
 
-> 后续查阅内容；例子为教学补充 [C]。
+> 后续查阅内容 [C]，示例使用 JDK 25。完整示例含多个顶层类型，请按[知识示例运行方法](../../practice/README.md#知识示例)编译并启动。
 
 ## 对象把状态与行为放在一起
 
@@ -105,3 +105,5 @@ public class PolymorphismDemo {
 仅为复用几行代码而继承，可能建立不合适的类型关系。先判断“是一种”还是“拥有/使用”；后者通常更适合组合。`@Override` 让编译器检查是否真的覆盖了预期方法。接口规则见 [JLS 第9章](https://docs.oracle.com/javase/specs/jls/se25/html/jls-9.html)。
 
 检验理解：两个变量与两个对象是否是一回事？`static` 字段为什么不适合保存每个对象各自不同的状态？
+
+[知识目录](../concepts.md) · [相邻主题：集合与异常](08-collections-and-exceptions.md)

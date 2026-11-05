@@ -13,6 +13,10 @@ jobs:
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
+      - name: Check document links, anchors and formatting
+        run: python3 scripts/check_repo.py
+      - name: Check document validator regressions
+        run: python3 -B -m unittest discover -s scripts -p 'test_*.py'
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
