@@ -2,6 +2,8 @@
 
 [知识目录](../concepts.md) · [前置：变量与分支](02-expressions-and-branches.md)
 
+> 知识说明 [C]，示例使用 JDK 25。相关原答：[A08 年龄输入](../learning.md#a08)。
+
 ## 文本、数值与引用
 
 `18` 是整数，`"18"` 是字符串，`'1'` 是字符。看起来相近，不代表可以用相同运算。`Integer.parseInt("18")` 把文本解析成整数；`String.valueOf(18)` 把整数转换成文本。
@@ -78,3 +80,5 @@ public class InputDemo {
 关闭 `Scanner` 也可能关闭底层输入源。上例只关闭固定字符串上的扫描器；共享 `System.in` 时不要在别处仍需输入时提前关闭。行为依据 [Scanner 文档](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Scanner.html)。
 
 检验理解：输入结束、空行、`12x`、数字后的空格，与读取到一个合法整数，分别是什么情况？
+
+[知识目录](../concepts.md) · [相关主题：方法与参数](06-methods.md)、[异常](08-collections-and-exceptions.md#exceptions)

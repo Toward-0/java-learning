@@ -10,3 +10,7 @@ target/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Python 文档检查缓存
+__pycache__/
+*.pyc
