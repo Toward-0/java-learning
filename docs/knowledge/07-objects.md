@@ -2,7 +2,7 @@
 
 [知识目录](../concepts.md) · [前置：方法](06-methods.md)
 
-> 后续查阅内容 [C]，示例使用 JDK 25。完整示例含多个顶层类型，请按[知识示例运行方法](../../practice/README.md#知识示例)编译并启动。
+> 后续查阅内容 [C]，示例使用 JDK 25；资料与运行结果不直接表示独立掌握。完整示例含多个顶层类型，请按[知识示例运行方法](../../practice/README.md#知识示例)编译并启动。
 
 ## 对象把状态与行为放在一起
 
@@ -57,6 +57,50 @@ public class ObjectDemo {
 
 封装的价值不是多写几个 getter/setter，而是让改变状态的路径遵守规则。例如有范围限制的成绩，更新方法应统一检查范围；随意开放字段会让任何调用者绕过规则。
 
+构造时检查一次还不够：后续更新也应维持同一规则。下面的完整程序保存为 `StateRuleDemo.java`：
+
+```java
+class StudySession {
+    private int minutes;
+
+    StudySession(int minutes) {
+        checkMinutes(minutes);
+        this.minutes = minutes;
+    }
+
+    void setMinutes(int minutes) {
+        checkMinutes(minutes);
+        this.minutes = minutes;
+    }
+
+    int getMinutes() {
+        return minutes;
+    }
+
+    private static void checkMinutes(int minutes) {
+        if (minutes < 0 || minutes > 1440) {
+            throw new IllegalArgumentException("分钟数必须在 0 到 1440 之间");
+        }
+    }
+}
+
+public class StateRuleDemo {
+    public static void main(String[] args) {
+        StudySession session = new StudySession(30);
+        try {
+            session.setMinutes(-1);
+        } catch (IllegalArgumentException ex) {
+            System.out.println(ex.getMessage());
+        }
+        System.out.println(session.getMinutes());
+    }
+}
+```
+
+输出 `分钟数必须在 0 到 1440 之间`、`30`。本例把范围作为对象始终要满足的规则；先检查再赋值，使失败更新保留原来的合法状态。直接构造 `new StudySession(-1)` 同样会失败，不会向调用者返回一个可正常使用的对象。异常处理细节见[集合与异常](08-collections-and-exceptions.md#exceptions)。
+
+这个规则由字段私有、构造器检查和更新方法检查共同维护，不是只靠字段名字表达。若某个字段指向可变数组或集合，还要考虑是否把内部对象直接交给外部：仅把引用声明为 `private`，但直接返回它，仍可能允许调用者绕过更新方法修改状态，见[数组共享](04-arrays.md#reference)。
+
 实例字段属于各个对象；`static` 字段属于类，在这些实例之间共享。实例方法有当前对象 `this`，静态方法没有，因此静态方法不能凭空访问某个实例的字段。参见 [JLS 字段与方法](https://docs.oracle.com/javase/specs/jls/se25/html/jls-8.html#jls-8.3)。
 
 ## 接口与多态：依赖能力
@@ -104,6 +148,6 @@ public class PolymorphismDemo {
 
 仅为复用几行代码而继承，可能建立不合适的类型关系。先判断“是一种”还是“拥有/使用”；后者通常更适合组合。`@Override` 让编译器检查是否真的覆盖了预期方法。接口规则见 [JLS 第9章](https://docs.oracle.com/javase/specs/jls/se25/html/jls-9.html)。
 
-检验理解：两个变量与两个对象是否是一回事？`static` 字段为什么不适合保存每个对象各自不同的状态？
+检验理解：两个变量与两个对象是否是一回事？`static` 字段为什么不适合保存每个对象各自不同的状态？为 `StudySession` 选择两端合法值和两个非法值，分别检查构造与更新；再说明一次失败更新后应观察到什么。
 
 [知识目录](../concepts.md) · [相邻主题：集合与异常](08-collections-and-exceptions.md)
